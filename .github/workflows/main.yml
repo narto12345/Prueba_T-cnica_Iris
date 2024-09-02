@@ -13,7 +13,7 @@ jobs:
     steps:
       # Comprobar el código desde el repositorio
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3 # Actualiza a la versión v3
 
       # Ejecutar el script que imprime "Hello, World!"
       - name: Run Hello World script
