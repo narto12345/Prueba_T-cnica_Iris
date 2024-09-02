@@ -13,6 +13,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Give execution permissions to the script
+        run: chmod +x hello.sh
+
       - name: Run Hello World script
         run: ./hello.sh
 
