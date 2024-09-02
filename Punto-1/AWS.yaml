@@ -1,6 +1,9 @@
+# Se especifica la versión de la sintaxis del archivo de CloudFormation
 AWSTemplateFormatVersion: "2010-09-09"
 Description: "Prueba IRIS"
 
+# Definición de parámetros personalizados para el nombre de la clave SSH
+# y la IP para el acceso
 Parameters:
   KeySSH:
     Description: "Ingrese el nombre de la clave SSH que se creará y asociará a la instancia"
@@ -12,11 +15,15 @@ Parameters:
     Type: String
 
 Resources:
+  # Se crea la clave SSH y se le asigna el nombre obtenido por el usuario,
+  # o por defecto se usará "EC2Key"
   EC2KeyPair:
     Type: AWS::EC2::KeyPair
     Properties:
       KeyName: !Ref KeySSH
 
+  # Se crea un grupo de seguridad para establecer el protocolo de comunicación,
+  # puerto e IP permitida.
   MySecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -27,12 +34,13 @@ Resources:
           ToPort: 22
           CidrIp: !Ref AllowedIP
 
+  # Se crea el recurso EC2 con los parametos requeridos
   MyEC2Instance:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: t2.micro
       KeyName: !Ref EC2KeyPair
-      ImageId: ami-0fc61db8544a617ed  
+      ImageId: ami-0fc61db8544a617ed
       SecurityGroupIds:
         - !Ref MySecurityGroup
       Placement:
