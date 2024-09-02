@@ -16,7 +16,8 @@ jobs:
       - name: Run Hello World script
         run: ./hello.sh
 
+      - name: Install ShellCheck
+        run: sudo apt-get install -y shellcheck
+
       - name: Lint Bash scripts
-        uses: ludeeus/action-shellcheck@v2
-        with:
-          targets: hello.sh
+        run: shellcheck hello.sh
