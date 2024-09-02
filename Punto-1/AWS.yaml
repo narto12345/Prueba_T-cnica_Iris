@@ -1,0 +1,48 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Prueba IRIS"
+
+Parameters:
+  KeySSH:
+    Description: "Ingrese el nombre de la clave SSH que se creará y asociará a la instancia"
+    Type: String
+    Default: EC2Key
+
+  AllowedIP:
+    Description: "Ingrese la dirección IP desde la que se permitirá el acceso SSH "
+    Type: String
+
+Resources:
+  EC2KeyPair:
+    Type: AWS::EC2::KeyPair
+    Properties:
+      KeyName: !Ref KeySSH
+
+  MySecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Acceso SSH desde una IP específica"
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: !Ref AllowedIP
+
+  MyEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      KeyName: !Ref EC2KeyPair
+      ImageId: ami-0fc61db8544a617ed  
+      SecurityGroupIds:
+        - !Ref MySecurityGroup
+      Placement:
+        AvailabilityZone: us-east-1a
+
+Outputs:
+  InstanceId:
+    Description: "ID de la instancia EC2 creada"
+    Value: !Ref MyEC2Instance
+
+  KeyPairPrivateKey:
+    Description: "La clave privada de SSH (solo se muestra al crear la clave)"
+    Value: !GetAtt EC2KeyPair.KeyMaterial
