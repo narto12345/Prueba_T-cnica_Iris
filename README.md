@@ -95,7 +95,7 @@ Una vez haya iniciado sesión en su cuenta de AWS, siga lo siguientes pasos:
 
 # 2. Crear un Pipeline de CI/CD básico con GitHub Actions:
 
-En el directorio **/.github/workflows/** encontrará un pipeline llamado **ci.yml** , el cual especeficia el siguiente comportamiento:
+En el directorio **/.github/workflows/** encontrará un pipeline llamado **ci.yml** , el cual especifica el siguiente comportamiento:
 
 ![pipeline](images/pipeline.png)
 
@@ -124,7 +124,7 @@ En este ejercicio vamos a "dockerizar" una aplicación de Node.js que utiliza Ex
 - **.dockerignore:** especifica los archivos a ignorar durante la "dockerización".
 - **Dockerfile:** Este archivo especifica los pasos para generar la imagen, contenedor y sus caracterisiticas de arranque.
 - **index:** Archivo de JavaScript que contiene el código fuente de la aplicación de Node. (Aquí se especifica el puerto por el cual se escucharán las solicitudes; usaremos el **3000**)
-- **package.json:** Este archivo define la metadata del proyecto de Node, y sus dependencias necesarias para su correcto funcionakiento.
+- **package.json:** Este archivo define la metadata del proyecto de Node, y sus dependencias necesarias para su correcto funcionamiento.
 
 2. Abrir **Docker Desktop**.
 
