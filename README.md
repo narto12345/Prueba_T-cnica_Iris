@@ -41,7 +41,7 @@ En el directorio **Punto-1** encontrará un fichero plantilla .yaml que contiene
 
 ## Ejecución del Script en AWS
 
-Una vez haya iniciado sesión en su cuenta de AWS, siga lo siguientes pasos:
+Una vez haya iniciado sesión en su cuenta de AWS, siga los siguientes pasos:
 
 1. Entrar a CloudFormation:
 
