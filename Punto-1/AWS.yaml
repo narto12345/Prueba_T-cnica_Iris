@@ -6,12 +6,12 @@ Description: "Prueba IRIS"
 # y la IP para el acceso
 Parameters:
   KeySSH:
-    Description: "Ingrese el nombre de la clave SSH que se creará y asociará a la instancia"
+    Description: "Ingrese el nombre de la clave SSH que se creara y asociara a la instancia"
     Type: String
     Default: EC2Key
 
   AllowedIP:
-    Description: "Ingrese la dirección IP desde la que se permitirá el acceso SSH "
+    Description: "Ingrese la direccion IP desde la que se permitira el acceso SSH "
     Type: String
 
 Resources:
@@ -24,10 +24,10 @@ Resources:
 
   # Se crea un grupo de seguridad para establecer el protocolo de comunicación,
   # puerto e IP permitida.
-  MySecurityGroup:
+  SecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: "Acceso SSH desde una IP específica"
+      GroupDescription: "Acceso SSH desde una IP especifica"
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 22
@@ -35,22 +35,20 @@ Resources:
           CidrIp: !Ref AllowedIP
 
   # Se crea el recurso EC2 con los parametos requeridos
-  MyEC2Instance:
+  EC2Instance:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: t2.micro
+      AvailabilityZone: us-east-1a
       KeyName: !Ref EC2KeyPair
-      ImageId: ami-0fc61db8544a617ed
+      ImageId: ami-0a0e5d9c7acc336f1
       SecurityGroupIds:
-        - !Ref MySecurityGroup
-      Placement:
-        AvailabilityZone: us-east-1a
+        - !Ref SecurityGroup
 
 Outputs:
   InstanceId:
     Description: "ID de la instancia EC2 creada"
-    Value: !Ref MyEC2Instance
-
-  KeyPairPrivateKey:
-    Description: "La clave privada de SSH (solo se muestra al crear la clave)"
-    Value: !GetAtt EC2KeyPair.KeyMaterial
+    Value: !Ref EC2Instance
+  ClaveSSH:
+    Description: "La private Key se encuentra en el parameter store"
+    Value: "La private Key se encuentra en el parameter store"
