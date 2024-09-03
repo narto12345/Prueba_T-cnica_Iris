@@ -114,3 +114,36 @@ En el directorio **/.github/workflows/** encontrará un pipeline llamado **ci.ym
 7. Ejecuta **shellcheck** en el script **hello.sh**
 
 # 3. Construir y ejecutar una aplicación Docker:
+
+En este ejercicio vamos a "dockerizar" una aplicación de Node.js que utiliza Express para responder a una solicitud Http con el método GET, respondiendo con el mensaje de "Hello, DevOps!".
+
+## Instrucciones
+
+1. Entrar al diretorio **Punto-3** el cual contiene los siguientes ficheros:
+
+- **.dockerignore:** especifica los archivos a ignorar durante la "dockerización".
+- **Dockerfile:** Este archivo especifica los pasos para generar la imagen, contenedor y sus caracterisiticas de arranque.
+- **index:** Archivo de JavaScript que contiene el código fuente de la aplicación de Node. (Aquí se especifica el puerto por el cual se escucharán las solicitudes; usaremos el **3000**)
+- **package.json:** Este archivo define la metadata del proyecto de Node, y sus dependencias necesarias para su correcto funcionakiento.
+
+2. Abrir **Docker Desktop**.
+
+3. Ejecutar lo siguiente comandos dentro del directorio **Punto-3:**
+
+```docker
+docker build -t punto-3 .
+```
+
+Este comando buscará el archivo **Dockerfile** para generar un contenedor a partir de la imagen especifica en el archivo, y la llamará "punto-3".
+
+```docker
+docker run -p 3000:3000 punto-3
+```
+
+Este comando ejecutará el contenedor a partir de la imagen, mapeando el puerto del contenedor y de nuestra máquina en el 3000, e iniciará el aplicativo web:
+
+![run-docker](images/start-docker.png)
+
+El mensaje **Server listening on PORT 3000** nos indica el puerto por el cual podemos realizar la solicitud:
+
+![run-docker](images/get.png)
